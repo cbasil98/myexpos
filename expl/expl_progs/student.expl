@@ -1,0 +1,26 @@
+type
+        student
+        {
+            string name;
+            int age;
+        }
+endtype
+int main()
+{
+    decl
+        student name1;
+        int temp;
+    enddecl
+    begin
+         breakpoint;
+        temp=exposcall("Heapset");
+        name1=alloc();
+        breakpoint;
+        name1.name="John";
+        breakpoint;
+        name1.age=89;
+        temp=exposcall("Write",-2,name1.name);
+        temp=exposcall("Write",-2,name1.age);
+        return 0;
+    end
+}
