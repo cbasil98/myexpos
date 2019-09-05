@@ -6,7 +6,9 @@ int main()
     begin
     a=1;
         while(a<=100)do
-            write(a);
+            if((a%2)==1)then
+                write(a);
+            endif;
             a=a+1;
         endwhile;
         return 0;
