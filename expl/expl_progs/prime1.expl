@@ -1,0 +1,26 @@
+int main()
+{
+    decl
+        int a,i,flag;
+    enddecl
+    begin
+        a=2;
+        while(a<101)do
+            breakpoint;
+            flag=0;
+            i=2;
+            while(i<(a/2))do
+                if((a%i)==0)then
+                    flag=1;
+                    break;
+                endif;
+                i=i+1;
+            endwhile;
+            if(flag==0)then
+                write(a);
+            endif;
+            a=a+1;
+        endwhile;
+        return 0;
+    end
+}

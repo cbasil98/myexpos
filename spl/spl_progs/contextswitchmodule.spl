@@ -8,9 +8,10 @@ process_table_entry = PROCESS_TABLE + currentPID * 16;
 [process_table_entry + 14] = PTBR;
 [process_table_entry + 15] = PTLR;
 
+alias currentID R3;
 
 currentPID=currentPID+1;
-
+currentID=currentPID;
 alias flag R2;
 flag=0;
 while(currentPID<16)do
@@ -24,7 +25,7 @@ while(currentPID<16)do
         PTLR=10;
         breakpoint;
         ireturn;           
-        endif;
+    endif;
     if([PROCESS_TABLE+ currentPID*16 + 4] == READY)then
         [PROCESS_TABLE+ currentPID*16 + 4] = RUNNING;
         [SYSTEM_STATUS_TABLE+1]=currentPID; 
@@ -33,15 +34,24 @@ while(currentPID<16)do
         SP=[PROCESS_TABLE+currentPID*16+11]*512+[PROCESS_TABLE+currentPID*16+12];
         flag=1;
         break;
-        endif;
-    currentPID=currentPID+1;
-    endwhile;
+    endif;
+    breakpoint;
+    currentPID=(currentPID+1)%16;
+    if(currentPID==0)then
+        continue;
+    endif;
+
+    if(currentID==currentPID)then
+
+        break;
+    endif;
+endwhile;
 if (flag==0)then
     [PROCESS_TABLE+ 4] = RUNNING;
     [SYSTEM_STATUS_TABLE+1]=0; 
     PTBR=[PROCESS_TABLE+14];
     PTLR=10;
     SP=[PROCESS_TABLE+11]*512+[PROCESS_TABLE+12];
-    endif;
+endif;
 multipop(BP);
 return;
