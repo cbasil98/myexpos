@@ -1,3 +1,4 @@
+//Device manager module
 alias functionName R1;
 alias PID R2;
 if(functionName==3)then
@@ -6,12 +7,26 @@ if(functionName==3)then
     PID=[SYSTEM_STATUS_TABLE + 1];
     call MOD_0;
     multipop(R1,R2,R3);
-    print R3;
+    print R3;   
     multipush(R1,R2,R3);
     functionName=9;
     PID=[SYSTEM_STATUS_TABLE+1];
     multipop(R1,R2,R3);
     return;
+else if(functionName==4)then
+    multipush(R1,R2,R3);
+    functionName=8;
+    PID=[SYSTEM_STATUS_TABLE + 1];
+    call MOD_0;
+    multipop(R1,R2,R3);
+    read;  
+    [PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 4]=WAIT_TERMINAL;
+    multipush(R1,R2,R3);
+    call SCHEDULER;
+    multipop(R1,R2,R3);
+    [[PTBR+2*(R3/512)]*512+R3%512]=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 8];
+    return;
 else
     return;
+endif;
 endif;

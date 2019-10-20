@@ -13,6 +13,8 @@ int main()
             endif;
             num=num+1;
         endwhile;
+        breakpoint;
+
         return 0;
     end
 }

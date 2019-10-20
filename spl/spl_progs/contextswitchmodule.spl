@@ -16,14 +16,12 @@ alias flag R2;
 flag=0;
 while(currentPID<16)do
     if([PROCESS_TABLE+ currentPID*16 + 4] == CREATED)then
-        breakpoint;
         SP=[PROCESS_TABLE + currentPID*16 + 13];
         [PROCESS_TABLE+ currentPID*16 + 4] = RUNNING;
         [PROCESS_TABLE+ currentPID*16 + 9] = 0;
         [SYSTEM_STATUS_TABLE+1]=currentPID;
         PTBR=[PROCESS_TABLE+currentPID*16+14];
         PTLR=10;
-        breakpoint;
         ireturn;           
     endif;
     if([PROCESS_TABLE+ currentPID*16 + 4] == READY)then
@@ -35,7 +33,6 @@ while(currentPID<16)do
         flag=1;
         break;
     endif;
-    breakpoint;
     currentPID=(currentPID+1)%16;
     if(currentPID==0)then
         continue;
