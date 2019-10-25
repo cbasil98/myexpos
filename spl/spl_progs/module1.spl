@@ -1,0 +1,47 @@
+//process manager module
+if(R1==2) then
+    alias userAreaPage R2;
+    userAreaPage = [PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 11];
+    multipush(R1,R2);
+    R1=2;
+    call MOD_2;
+    multipop(R1,R2);
+endif;
+if(R1==3)then
+    alias PID R2;
+    PID=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 1];
+    multipush(R1,R2);
+    R1=4;
+    call MOD_1;
+    multipop(R1,R2);
+    multipush(R1,R2);
+    R1=2;
+    call MOD_1;
+    multipop(R1,R2);
+    [PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 4] = TERMINATED; 
+endif; 
+
+
+if(R1==4)then
+    R2=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 14];
+    [R2+0] = -1;
+    [R2+1] = "0000";
+    [R2+2] = -1;
+    [R2+3] = "0000";
+    R3=4;
+   
+    while(R3<=19)do
+        if([R2+R3]!=-1)then
+            multipush(R1,R2,R3);
+            R1=1;
+            R2=[R2+R3];
+            call MOD_2;
+            multipop(R1,R2,R3);
+            [R2+R3]=-1;
+            [R2+R3+1]=0000;
+            
+        endif;
+        R3=R3+2;
+    endwhile;
+endif;
+return;

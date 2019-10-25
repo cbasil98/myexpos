@@ -10,3 +10,6 @@ load --module 4 /home/basil/myexpos/spl/spl_progs/module4.xsm
 load --int=6 /home/basil/myexpos/spl/spl_progs/INT6.xsm
 load --int=console /home/basil/myexpos/spl/spl_progs/consoleinterrupthandler.xsm
 load --exhandler /home/basil/myexpos/spl/spl_progs/exchand.xsm
+load --int=9 /home/basil/myexpos/spl/spl_progs/INT9.xsm
+load --module 1 /home/basil/myexpos/spl/spl_progs/module1.xsm
+load --module 2 /home/basil/myexpos/spl/spl_progs/module2.xsm

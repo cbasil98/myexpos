@@ -31,8 +31,35 @@ loadi(14,27);
 loadi(15,28);
 [TERMINAL_STATUS_TABLE+0]=0;
 
+//interrupt 9 
+loadi(20,33);
+loadi(21,34);
+
+//module 1
+loadi(42,55);
+loadi(43,56);
+//module 2
+loadi(44,57);
+loadi(45,58);
+//inode table
+loadi(59,3);
+loadi(60,4);
+R0=0;
+while(R0<83)do
+    [MEMORY_FREE_LIST + R0]=1;
+    R0=R0+1;
+endwhile;
+while(R0<128)do
+    [MEMORY_FREE_LIST + R0]=0;
+    R0=R0+1;
+endwhile;
+
+
+[SYSTEM_STATUS_TABLE + 2] = 45;
+[SYSTEM_STATUS_TABLE + 3] = 0;
+
 //Init progran PID=1
-breakpoint;
+
 PTBR = PAGE_TABLE_BASE+20;
 PTLR = 10;
 //Library
