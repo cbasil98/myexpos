@@ -65,12 +65,6 @@ endwhile;
 //Init progran PID=1
 
 
-alias pte R0;
-pte=80*512+RESOURCE_TABLE_OFFSET;
-while(pte<81*512)do
-    [pte]=-1;
-    pte=pte+2;
-endwhile;
 
 PTBR = PAGE_TABLE_BASE+20;
 PTLR = 10;

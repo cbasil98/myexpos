@@ -13,4 +13,4 @@ load --exhandler /home/basil/myexpos/spl/spl_progs/exchand.xsm
 load --int=9 /home/basil/myexpos/spl/spl_progs/INT9.xsm
 load --module 1 /home/basil/myexpos/spl/spl_progs/module1.xsm
 load --module 2 /home/basil/myexpos/spl/spl_progs/module2.xsm
-load --int=disk /home/basil/myexpos/spl/spl_progs/Diskinterrupthandler.spl
+load --int=disk /home/basil/myexpos/spl/spl_progs/Diskinterrupthandler.xsm

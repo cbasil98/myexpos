@@ -3,14 +3,13 @@ alias functionName R1;
 alias PID R2;
 
 if(functionName==3)then  //acquire disk
-    print "here7";
+    
     while([DISK_STATUS_TABLE + 0]==1)do
         [PROCESS_TABLE + PID * 16 + 4]=WAIT_DISK;
         multipush(R1,R2);
         call MOD_5;
         multipop(R1,R2);
     endwhile;
-    print "here8";
     [DISK_STATUS_TABLE + 0]=1;
     [DISK_STATUS_TABLE+4]=PID;
     return;
