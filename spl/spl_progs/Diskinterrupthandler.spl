@@ -1,0 +1,12 @@
+breakpoint;
+SP=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 11]*512-1;
+backup;
+[DISK_STATUS_TABLE + 1]=0;
+R1=0;
+while(R1<16)do
+    if([PROCESS_TABLE + R1 * 16 + 4]==WAIT_DISK)then
+        [PROCESS_TABLE + R1 * 16 + 4]=READY;
+    endif;
+endwhile;
+restore;
+ireturn;

@@ -44,6 +44,10 @@ loadi(45,58);
 //inode table
 loadi(59,3);
 loadi(60,4);
+//disk interrupt
+loadi(6,19);
+loadi(7,20);
+[DISK_STATUS_TABLE+0]=0;
 R0=0;
 while(R0<83)do
     [MEMORY_FREE_LIST + R0]=1;
@@ -59,6 +63,14 @@ endwhile;
 [SYSTEM_STATUS_TABLE + 3] = 0;
 
 //Init progran PID=1
+
+
+alias pte R0;
+pte=80*512+RESOURCE_TABLE_OFFSET;
+while(pte<81*512)do
+    [pte]=-1;
+    pte=pte+2;
+endwhile;
 
 PTBR = PAGE_TABLE_BASE+20;
 PTLR = 10;
