@@ -47,6 +47,9 @@ loadi(60,4);
 //disk interrupt
 loadi(6,19);
 loadi(7,20);
+//disk free list 
+loadi(61,2);
+
 [DISK_STATUS_TABLE+0]=0;
 R0=0;
 while(R0<83)do
@@ -58,6 +61,11 @@ while(R0<128)do
     R0=R0+1;
 endwhile;
 
+R0=DISK_MAP_TABLE + 10;
+while(R0<DISK_MAP_TABLE + 20)do 
+    [R0]=-1;
+    R0=R0+1;
+endwhile;
 
 [SYSTEM_STATUS_TABLE + 2] = 45;
 [SYSTEM_STATUS_TABLE + 3] = 0;

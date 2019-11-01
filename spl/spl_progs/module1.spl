@@ -23,11 +23,13 @@ endif;
 
 
 if(R1==4)then
+    R4=R2;
     R2=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 14];
     [R2+0] = -1;
     [R2+1] = "0000";
     [R2+2] = -1;
     [R2+3] = "0000";
+    
     R3=4;
    
     while(R3<=19)do
@@ -43,5 +45,34 @@ if(R1==4)then
         endif;
         R3=R3+2;
     endwhile;
+
+    R3=2;
+    while(DISK_MAP_TABLE + R4*10 + R3 < DISK_MAP_TABLE + R4*10 + 4)do
+        if([DISK_MAP_TABLE + R4*10 + R3]!=-1)then
+            multipush(R0,R1,R2,R3);
+            R2=[DISK_MAP_TABLE + R4*10 + R3];
+            R3=R4;
+            call MOD_2;
+            multipop(R0,R1,R2,R3,R4);
+        endif;
+        R3=R3+1;
+    endwhile;
+    R3=8;
+    while(DISK_MAP_TABLE + R4*10 + R3 < DISK_MAP_TABLE + R4*10 + 10)do
+        if([DISK_MAP_TABLE + R4*10 + R3]!=-1)then
+            multipush(R0,R1,R2,R3);
+            R2=[DISK_MAP_TABLE + R4*10 + R3];
+            R3=R4;
+            call MOD_2;
+            multipop(R0,R1,R2,R3,R4);
+        endif;
+        R3=R3+1;
+    endwhile;
+    R3=2;
+    while(DISK_MAP_TABLE + R4*10 + R3 < DISK_MAP_TABLE + R4*10 + 10)do
+        [DISK_MAP_TABLE + R4*10 + R3]=-1;
+        R3=R3+1;
+    endwhile;
+
 endif;
 return;
